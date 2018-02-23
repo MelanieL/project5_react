@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Logo from './logo';
+import Jar from './jar';
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCjYetNgrYSjfnwt8_BwbTXNymm8YK8QIA",
+    authDomain: "project-5-jars.firebaseapp.com",
+    databaseURL: "https://project-5-jars.firebaseio.com",
+    projectId: "project-5-jars",
+    storageBucket: "",
+    messagingSenderId: "102990948342"
+  };
+  firebase.initializeApp(config);
 
 // This section is for implementing React router:
 // class About extends React.Component {
@@ -35,7 +47,37 @@ import Logo from './logo';
 //   }
 // }
 
+
+
 class App extends React.Component {
+    constructor () {
+      super();
+      this.state = {
+        category: '',
+        amount: '',
+        purchases: []
+      };
+      this.addJar = this.addJar.bind(this);
+      this.handleChange = this.handleChange(this);
+    }
+
+    addJar(e) {
+      e.preventDefault();
+      const jar = {
+        name: this.state.category,
+        total: this.state.amount
+      };
+      console.log(jar);
+    }
+
+    handleChange(e) {
+      console.log('Handling the change');
+      // console.log(e.target.id);
+      // this.setState({
+      //   [e.target.id]: e.target.value
+      // });
+    }
+
     render() {
       return (
         <Router>
@@ -54,8 +96,25 @@ class App extends React.Component {
                 <h1>Jars</h1>
               </div>
               <div className="sidebar__actions">
-                <button name="button">Add Jar</button>
-                <button name="button">Log a purchase</button>
+                <h4>Add a jar:</h4>
+                {/* Need to add onSubmit={} into form when needed */}
+                <form action="" onSubmit={this.addJar}>
+                  <label htmlFor="add_jar_cat">Category name:</label>
+                  <input type="text" value="" onChange={this.handleChange} id="add_jar_cat"/>
+                  <label htmlFor="cat_total">Category total:</label>
+                  <input type="text" value="" onChange={this.handleChange} id="cat_total"/>
+                  <input className="button add_jar_button" type="submit" value="+ Add Jar"/>
+                </form>
+
+                <h4>Log a purchase:</h4>
+                <form action="">
+                  <label htmlFor="add_pur_cat">Category:</label>
+                  <input type="text" value="" id="add_pur_cat" />
+                  <label htmlFor="pur_total">Purchase total:</label>
+                  <input type="text" value="" id="pur_total" />
+                  <input className="button add_pur_button" type="submit" value="+ Purchase" />
+                </form>
+
                 <button name="button">Logout</button>
               </div>
               <footer>
@@ -64,16 +123,8 @@ class App extends React.Component {
             </div>
 
             <main className="mainpage">
-              <div className="mainpage__jardiv">
-                <div className="mainpage__jardiv__imgdiv">
-                  <Logo />
-                </div>
-                <h3 className="mainpage__jardiv--category">Category</h3>
-                <h3 className="mainpage__jardiv--amount">Amount</h3>
-                <ul>
-                  <li>Logged purchase</li>
-                </ul>
-              </div>
+            {/* This is where the jar should insert each time one is created */}
+            <Jar />
             </main>
             {/* For React Router */}
             {/* <Link to="/about">About</Link>

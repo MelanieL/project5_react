@@ -27,6 +27,11 @@ img {
     width: 30px;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+}
+
 .sidebar__actions {
     display: flex;
     flex-direction: column;
