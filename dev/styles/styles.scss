@@ -1,6 +1,14 @@
-@import "components/nomalize";
+@import "components/normalize";
 @import "components/base";
 @import "components/typography";
+
+* {
+    outline: 1px solid red;
+}
+
+img {
+    width: 100%;
+}
 
 .application {
     display: flex;
@@ -15,8 +23,21 @@
     width: 30%
 }
 
+.sidebar__titlebox__logodiv {
+    width: 30px;
+}
+
+.sidebar__actions {
+    display: flex;
+    flex-direction: column;
+}
+
 .mainpage {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 70%;
+}
+
+.mainpage__jardiv__imgdiv {
+    width: 300px;
 }

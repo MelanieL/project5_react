@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Logo from './logo';
 
@@ -39,6 +40,11 @@ class App extends React.Component {
       return (
         <Router>
           <div className="application">
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>Jars</title>
+              <link rel="stylesheet" type="text/css" href="public/styles/style.css"/>
+            </Helmet>
             <div className="sidebar">
               <div className="sidebar__titlebox">
                 <div className="sidebar__titlebox__logodiv">
@@ -62,6 +68,11 @@ class App extends React.Component {
                 <div className="mainpage__jardiv__imgdiv">
                   <Logo />
                 </div>
+                <h3 className="mainpage__jardiv--category">Category</h3>
+                <h3 className="mainpage__jardiv--amount">Amount</h3>
+                <ul>
+                  <li>Logged purchase</li>
+                </ul>
               </div>
             </main>
             {/* For React Router */}
