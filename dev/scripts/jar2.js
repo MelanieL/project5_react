@@ -8,8 +8,8 @@ class Jar extends React.Component {
                 <div className="mainpage__jardiv__imgdiv">
                     <Logo />
                 </div>
-                <h3 className="mainpage__jardiv--category">Category</h3>
-                <h3 className="mainpage__jardiv--amount">Amount</h3>
+                <h3 className="mainpage__jardiv--category">{this.category}</h3>
+                <h3 className="mainpage__jardiv--amount">{this.amount}</h3>
                 <ul>
                     <li>Logged purchase</li>
                 </ul>
