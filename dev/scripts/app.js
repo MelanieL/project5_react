@@ -25,6 +25,7 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.addJar = this.addJar.bind(this);
+    this.removeJar = this.removeJar.bind(this);
   }
 
   handleChange(e) {
@@ -37,7 +38,6 @@ class App extends React.Component {
     const dbref = firebase.database().ref('/jars');
 
     dbref.on('value', (snapshot) => {
-      // console.log(snapshot.val());
       const data = snapshot.val();
       const state = [];
       for (let key in data) {
@@ -65,6 +65,11 @@ class App extends React.Component {
       jaramount: ''
     });
     
+  }
+
+  removeJar(key) {
+    console.log(key);
+    return firebase.database().ref('jars').child(key).remove();
   }
 
   render() {
@@ -117,13 +122,8 @@ class App extends React.Component {
         <div className="mainpage">
           {/* This is where I want my jars/props to render */}
             {this.state.jars.map((jar) => {
-              // The map method gets provided multiple parameters
-              // the first is the element in the array we are currently iterating over.
-              // the second is the index of the element
-              // the thirds, that we don't use is the original array
-              // MDN
               return (
-                <Jar data={jar} key={jar.key}/>
+                <Jar data={jar} key={jar.key} remove={this.removeJar} jarIndex={jar.key}/>
               )
             })}
 
@@ -131,6 +131,8 @@ class App extends React.Component {
       </div>
     )
   }
+
+  
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
