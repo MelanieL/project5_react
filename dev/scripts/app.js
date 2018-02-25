@@ -2,110 +2,133 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from "react-helmet";
 import Logo from './logo';
-// import Jar from './jar';
+import Jar from './jar';
 
-  // Initialize Firebase
-//   var config = {
-//     apiKey: "AIzaSyCjYetNgrYSjfnwt8_BwbTXNymm8YK8QIA",
-//     authDomain: "project-5-jars.firebaseapp.com",
-//     databaseURL: "https://project-5-jars.firebaseio.com",
-//     projectId: "project-5-jars",
-//     storageBucket: "",
-//     messagingSenderId: "102990948342"
-//   };
-//   firebase.initializeApp(config);
-
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCjYetNgrYSjfnwt8_BwbTXNymm8YK8QIA",
+    authDomain: "project-5-jars.firebaseapp.com",
+    databaseURL: "https://project-5-jars.firebaseio.com",
+    projectId: "project-5-jars",
+    storageBucket: "",
+    messagingSenderId: "102990948342"
+  };
+  firebase.initializeApp(config);
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      jarcats: ["Category"],
-      jarcat: ""
-    }
+      jarcat: '',
+      jaramount: '',
+      jars: []
+    };
     this.handleChange = this.handleChange.bind(this);
     this.addJar = this.addJar.bind(this);
   }
 
   handleChange(e) {
     this.setState({
-      jarcat: e.target.value
+      [e.target.id]: e.target.value
     });
   }
+
+  componentDidMount() {
+    const dbref = firebase.database().ref('/jars');
+
+    dbref.on('value', (snapshot) => {
+      // console.log(snapshot.val());
+      const data = snapshot.val();
+      const state = [];
+      for (let key in data) {
+        data[key].key = key;
+        state.push(data[key]);
+      }
+      this.setState({
+        jars: state
+      });
+    });
+  }
+
 
   addJar(e) {
     e.preventDefault();
     // This is making an array from whatever we pass it
-    const jarState = Array.from(this.state.jarcats);
-    jarState.push(this.state.jarcat);
+    const jar = {
+      name: this.state.jaramount,
+      value: this.state.jarcat,
+    };
+    const dbref = firebase.database().ref('/jars');
+    dbref.push(jar);
     this.setState({
-      jarcats: jarState
+      jarcat: '',
+      jaramount: ''
     });
-
+    
   }
 
   render() {
     return (
-        <div className="application">
-          <Helmet>
-            <meta charSet="utf-8" />
-            <title>Jars</title>
-            <link rel="stylesheet" type="text/css" href="public/styles/style.css"/>
-          </Helmet>
-          <div className="sidebar">
-            <div className="sidebar__titlebox">
-              <div className="sidebar__titlebox__logodiv">
-                {/* Logo Credit: Jar by Deemak Daksina S from the Noun Project */}
-                <Logo />
-              </div>
-              <h1>Jars</h1>
+      <div className="application">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Jars</title>
+          <link rel="stylesheet" type="text/css" href="public/styles/style.css" />
+        </Helmet>
+        <div className="sidebar">
+          <div className="sidebar__titlebox">
+            <div className="sidebar__titlebox__logodiv">
+              {/* Logo Credit: Jar by Deemak Daksina S from the Noun Project */}
+              <Logo />
             </div>
-            <div className="sidebar__actions">
-              <h4>Add a jar:</h4>
-              <form onSubmit={this.addJar}>
+            <h1>Jars</h1>
+          </div>
+          <div className="sidebar__actions">
+            <h4>Add a jar:</h4>
+            <form onSubmit={this.addJar}>
 
-                <label htmlFor="add_jar_cat">Category name:</label>
-                <input type="text" id="add_jar_cat" name="jarcat" value={this.state.jarcat} onChange={this.handleChange}/>
+              <label htmlFor="jarcat">Category name:</label>
+              <input type="text" id="jarcat" value={this.state.jarcat} onChange={this.handleChange} />
 
-                <label htmlFor="cat_total">Category total:</label>
-                <input type="text" id="cat_total"/>
+              <label htmlFor="jaramount">Category total:</label>
+              <input type="text" id="jaramount" value={this.state.jaramount} onChange={this.handleChange}/>
 
-                <button className="button add_jar_button">+ Add Jar</button>
-              </form>
+              <input className="button add_jar_button" type="submit" value="Add Todo" />
+            </form>
 
-              <h4>Log a purchase:</h4>
-              <form>
-                <label htmlFor="add_pur_cat">Category:</label>
-                <input type="text" value="" id="add_pur_cat" />
+            <h4>Log a purchase:</h4>
+            <form>
+              <label htmlFor="add_pur_cat">Category:</label>
+              <input type="text" value="" id="add_pur_cat" />
 
-                <label htmlFor="pur_total">Purchase total:</label>
-                <input type="text" value="" id="pur_total" />
+              <label htmlFor="pur_total">Purchase total:</label>
+              <input type="text" value="" id="pur_total" />
 
-                <input className="button add_pur_button" type="submit" value="+ Purchase" />
-              </form>
+              <input className="button add_pur_button" type="submit" value="+ Purchase" />
+            </form>
 
-              <button name="button">Logout</button>
-            </div>
-            <footer>
-              &copy; 2018 - Melanie Phillips
+            <button name="button">Logout</button>
+          </div>
+          <footer>
+            &copy; 2018 - Melanie Phillips
             </footer>
-          </div>
-
-          <div className="mainpage">
-              <div className="mainpage__jardiv">
-                <div className="mainpage__jardiv__imgdiv">
-                <Logo />
-              {this.state.jarcats.map((jarcat, i) => {
-                return <h3 key={`jarcat-${i}`} className="mainpage__jardiv--category">{jarcat}</h3>
-                })}
-                </div>
-              <h3 className="mainpage__jardiv--amount">Amount</h3>
-              <ul>
-              <li>Logged purchases:</li>
-              </ul>
-              </div>
-          </div>
         </div>
+
+        <div className="mainpage">
+          {/* This is where I want my jars/props to render */}
+            {this.state.jars.map((jar) => {
+              // The map method gets provided multiple parameters
+              // the first is the element in the array we are currently iterating over.
+              // the second is the index of the element
+              // the thirds, that we don't use is the original array
+              // MDN
+              return (
+                <Jar data={jar} key={jar.key}/>
+              )
+            })}
+
+        </div>
+      </div>
     )
   }
 }
