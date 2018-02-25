@@ -11,7 +11,6 @@ const Jar = (props) => {
             <h3>{props.data.name}</h3>
         </div>
         <button onClick={() => props.remove(props.jarIndex)}>✗</button>
-        <h3 className="mainpage__jardiv--amount">Amount</h3>
         <ul>
             <li>Logged purchases:</li>
         </ul>

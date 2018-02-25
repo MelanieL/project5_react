@@ -98,7 +98,7 @@ class App extends React.Component {
               <label htmlFor="jaramount">Category total:</label>
               <input type="text" id="jaramount" value={this.state.jaramount} onChange={this.handleChange}/>
 
-              <input className="button add_jar_button" type="submit" value="Add Todo" />
+              <input className="button add_jar_button" type="submit" value="Add Jar" />
             </form>
 
             <h4>Log a purchase:</h4>
