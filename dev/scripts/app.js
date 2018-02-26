@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Helmet } from "react-helmet";
 import Logo from './logo';
 import Jar from './jar';
+import Purchase from './purchase';
 
 // Initialize Firebase
   var config = {
@@ -21,7 +22,7 @@ class App extends React.Component {
     this.state = {
       jarcat: '',
       jaramount: '',
-      jars: []
+      jars: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.addJar = this.addJar.bind(this);
@@ -45,11 +46,10 @@ class App extends React.Component {
         state.push(data[key]);
       }
       this.setState({
-        jars: state
+        jars: state,
       });
     });
   }
-
 
   addJar(e) {
     e.preventDefault();
@@ -102,14 +102,14 @@ class App extends React.Component {
             </form>
 
             <h4>Log a purchase:</h4>
-            <form>
-              <label htmlFor="add_pur_cat">Category:</label>
-              <input type="text" value="" id="add_pur_cat" />
+            <form onSubmit={Jar.addPurchase}>
+              <label htmlFor="purchasecat">Category name:</label>
+              <input type="text" id="purchasecat" value={Jar.state.purchasecat} onChange={Jar.handleChange} />
 
-              <label htmlFor="pur_total">Purchase total:</label>
-              <input type="text" value="" id="pur_total" />
+              <label htmlFor="purchaseamount">Purchase amount:</label>
+              <input type="text" id="purchaseamount" value={Jar.state.purchaseamount} onChange={Jar.handleChange} />
 
-              <input className="button add_pur_button" type="submit" value="+ Purchase" />
+              <input className="button add_pur_button" type="submit" value="Log Purchase" />
             </form>
 
             <button name="button">Logout</button>
@@ -131,8 +131,6 @@ class App extends React.Component {
       </div>
     )
   }
-
-  
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
