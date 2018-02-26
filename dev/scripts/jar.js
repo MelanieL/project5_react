@@ -41,7 +41,15 @@ class Jar extends React.Component {
 
     addPurchase(e) {
         e.preventDefault();
-        // This is making an array from whatever we pass it
+        const dbrefjar = firebase.database().ref(`jars/${this.props.jarIndex}/name`);
+        
+        dbrefjar.once('value', (snapshot) => {
+            const data = snapshot.val();
+            const newJarTotal =  data - this.state.purchaseamount;
+            // Set will reset a value in Firebase
+            dbrefjar.set(newJarTotal);
+        });
+
         const purchase = {
             name: this.state.purchaseamount,
             value: this.state.purchasecat,
@@ -55,8 +63,17 @@ class Jar extends React.Component {
     }
 
     removePurchase(key) {
-        console.log(key);
-        return firebase.database().ref(`jars/${this.props.jarIndex}/purchases`).child(key).remove();
+        
+        const dbrefjar = firebase.database().ref(`jars/${this.props.jarIndex}/name`);
+        
+        dbrefjar.once('value', (snapshot) => {
+            const data = snapshot.val();
+            const newJarTotal = data - this.state.purchaseamount;
+            // Set will reset a value in Firebase
+            dbrefjar.set(newJarTotal);
+        });
+        
+        firebase.database().ref(`jars/${this.props.jarIndex}/purchases`).child(key).remove();
     }
 
     render() {
@@ -69,6 +86,7 @@ class Jar extends React.Component {
                 <button onClick={() => this.props.remove(this.props.jarIndex)}>✗</button>
             </div>
                 <h4>Log a purchase:</h4>
+                {/* Removed 2nd submit */}
                 <form onSubmit={this.addPurchase}>
                     <label htmlFor="purchasecat">Purchase name:</label>
                     <input type="text" id="purchasecat" value={this.state.purchasecat} onChange={this.handleChange} />
