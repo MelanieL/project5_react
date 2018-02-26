@@ -6,6 +6,7 @@ const Purchase = (props) => {
     return (
         <div>
             <li>{props.data.value} - {props.data.name}</li>
+            <button onClick={() => props.remove(props.purchaseIndex)}>✗</button>
             {/* <button onClick={() => props.remove(props.jarIndex)}>✗</button> */}
         </div>
     );

@@ -5,7 +5,7 @@ import Purchase from './purchase';
 
 class Jar extends React.Component {
     constructor() {
-        super();
+        super();      
         this.state = {
             purchasecat: '',
             purchaseamount: '',
@@ -24,7 +24,7 @@ class Jar extends React.Component {
 
     componentDidMount() {
         // Does this need to be jars/purchases?
-        const dbref = firebase.database().ref('/purchases');
+        const dbref = firebase.database().ref(`jars/${this.props.jarIndex}/purchases`);
 
         dbref.on('value', (snapshot) => {
             const data = snapshot.val();
@@ -46,7 +46,7 @@ class Jar extends React.Component {
             name: this.state.purchaseamount,
             value: this.state.purchasecat,
         };
-        const dbref = firebase.database().ref('/purchases');
+        const dbref = firebase.database().ref(`jars/${this.props.jarIndex}/purchases`);
         dbref.push(purchase);
         this.setState({
             purchasecat: '',
@@ -54,9 +54,9 @@ class Jar extends React.Component {
         });
     }
 
-    removPurchase(key) {
+    removePurchase(key) {
         console.log(key);
-        return firebase.database().ref('purchases').child(key).remove();
+        return firebase.database().ref(`jars/${this.props.jarIndex}/purchases`).child(key).remove();
     }
 
     render() {
@@ -66,11 +66,26 @@ class Jar extends React.Component {
                 <Logo />
                 <h3>{this.props.data.value}</h3>
                 <h3>{this.props.data.name}</h3>
+                <button onClick={() => this.props.remove(this.props.jarIndex)}>✗</button>
             </div>
-            <button onClick={() => this.props.remove(props.purchaseIndex)}>✗</button>
+                <h4>Log a purchase:</h4>
+                <form onSubmit={this.addPurchase}>
+                    <label htmlFor="purchasecat">Purchase name:</label>
+                    <input type="text" id="purchasecat" value={this.state.purchasecat} onChange={this.handleChange} />
+
+                    <label htmlFor="purchaseamount">Purchase amount:</label>
+                    <input type="text" id="purchaseamount" value={this.state.purchaseamount} onChange={this.handleChange} />
+
+                    <input className="button add_pur_button" type="submit" value="Log Purchase" />
+                </form>
             <h4>Logged purchases:</h4>
             <ul>
-                <Purchase data={purchase} key={purchase.key} remove={this.removePurchase} purchaseIndex={purchase.key} />
+
+            {this.state.purchases.map((purchase) => {
+                return (
+                    <Purchase data={purchase} key={purchase.key} remove={this.removePurchase} purchaseIndex={purchase.key} />
+                )
+            })}
             </ul>
             </div>
         );

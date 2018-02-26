@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Helmet } from "react-helmet";
 import Logo from './logo';
 import Jar from './jar';
 import Purchase from './purchase';
@@ -75,11 +74,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="application">
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>Jars</title>
-          <link rel="stylesheet" type="text/css" href="public/styles/style.css" />
-        </Helmet>
         <div className="sidebar">
           <div className="sidebar__titlebox">
             <div className="sidebar__titlebox__logodiv">
@@ -101,18 +95,8 @@ class App extends React.Component {
               <input className="button add_jar_button" type="submit" value="Add Jar" />
             </form>
 
-            <h4>Log a purchase:</h4>
-            <form onSubmit={Jar.addPurchase}>
-              <label htmlFor="purchasecat">Category name:</label>
-              <input type="text" id="purchasecat" value={Jar.state.purchasecat} onChange={Jar.handleChange} />
-
-              <label htmlFor="purchaseamount">Purchase amount:</label>
-              <input type="text" id="purchaseamount" value={Jar.state.purchaseamount} onChange={Jar.handleChange} />
-
-              <input className="button add_pur_button" type="submit" value="Log Purchase" />
-            </form>
-
             <button name="button">Logout</button>
+
           </div>
           <footer>
             &copy; 2018 - Melanie Phillips
@@ -123,7 +107,9 @@ class App extends React.Component {
           {/* This is where I want my jars/props to render */}
             {this.state.jars.map((jar) => {
               return (
-                <Jar data={jar} key={jar.key} remove={this.removeJar} jarIndex={jar.key}/>
+                <div>
+                  <Jar data={jar} key={jar.key} remove={this.removeJar} jarIndex={jar.key}/>
+                </div>
               )
             })}
 
