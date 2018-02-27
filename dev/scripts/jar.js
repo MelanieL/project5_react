@@ -81,32 +81,32 @@ class Jar extends React.Component {
     render() {
         return (
             <div className="mainpage__jardiv">
-            <div className="mainpage__jardiv__imgdiv">
-                <Logo />
-                <h3>{this.props.data.value}</h3>
-                <h3>{this.props.data.name}</h3>
-                <button onClick={() => this.props.remove(this.props.jarIndex)}>✗</button>
-            </div>
-                <h4>Log a purchase:</h4>
+                <button onClick={() => this.props.remove(this.props.jarIndex)}><div className="mainpage__jardiv__deleteimgdiv"><img src="dev/images/icon_delete.png" alt="" srcset="" /></div></button>
+                {/* Delete by Michiel Willemsen from the Noun Project */}
+                <div className="mainpage__jardiv__imgdiv">
+                    <Logo />
+                </div>
+                <h3 className="mainpage__jardiv__jarcat">{this.props.data.value}</h3>
+                <h3 className="mainpage__jardiv__jaramount">${this.props.data.name}</h3>
+                <h4>New Purchase</h4>
                 {/* Removed 2nd submit */}
                 <form onSubmit={this.addPurchase}>
-                    <label htmlFor="purchasecat">Purchase name:</label>
+                    <label htmlFor="purchasecat">Name</label>
                     <input type="text" id="purchasecat" value={this.state.purchasecat} onChange={this.handleChange} />
 
-                    <label htmlFor="purchaseamount">Purchase amount:</label>
+                    <label htmlFor="purchaseamount">Amount</label>
                     <input type="text" id="purchaseamount" value={this.state.purchaseamount} onChange={this.handleChange} />
 
                     <input className="button add_pur_button" type="submit" value="Log Purchase" />
                 </form>
-            <h4>Logged purchases:</h4>
-            <ul>
-
-            {this.state.purchases.map((purchase) => {
-                return (
-                    <Purchase data={purchase} key={purchase.key} remove={() => this.removePurchase(purchase.key)} purchaseIndex={purchase.key} />
-                )
-            })}
-            </ul>
+                <h5>Purchases:</h5>
+                <ul>
+                    {this.state.purchases.map((purchase) => {
+                        return (
+                            <Purchase data={purchase} key={purchase.key} remove={() => this.removePurchase(purchase.key)} purchaseIndex={purchase.key} />
+                        )
+                    })}
+                </ul>
             </div>
         );
     }

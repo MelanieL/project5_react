@@ -4,11 +4,7 @@ import Jar from './jar';
 // Simple component, no need for "this"
 const Purchase = (props) => {
     return (
-        <div>
-            <li>{props.data.value} - {props.data.name}</li>
-            <button onClick={() => props.remove(props.purchaseIndex)}>✗</button>
-            {/* <button onClick={() => props.remove(props.jarIndex)}>✗</button> */}
-        </div>
+        <li>{props.data.value} - ${props.data.name} <button onClick={() => props.remove(props.purchaseIndex)}><div className="mainpage__jardiv__deletepurdiv"><img src="dev/images/icon_delete.png" alt="" srcset="" /></div></button></li>
     );
 };
 

@@ -86,10 +86,10 @@ class App extends React.Component {
             <h4>New Jar</h4>
             <form onSubmit={this.addJar}>
 
-              <label htmlFor="jarcat">Category Name</label>
+              <label htmlFor="jarcat">Category</label>
               <input type="text" id="jarcat" value={this.state.jarcat} onChange={this.handleChange} />
 
-              <label htmlFor="jaramount">Category Total</label>
+              <label htmlFor="jaramount">Total</label>
               <input type="text" id="jaramount" value={this.state.jaramount} onChange={this.handleChange}/>
 
               <input className="button add_jar_button" type="submit" value="Add Jar" />
@@ -105,15 +105,16 @@ class App extends React.Component {
         </div>
 
         <div className="mainpage">
-          {/* This is where I want my jars/props to render */}
-            {this.state.jars.map((jar) => {
-              return (
-                <div>
-                  <Jar data={jar} key={jar.key} remove={this.removeJar} jarIndex={jar.key}/>
-                </div>
-              )
-            })}
-
+          <div className="mainpage__titlediv">
+            <h3>Your Jars</h3>
+          </div>
+          <div className="mainpage__jarsdiv">
+              {this.state.jars.map((jar) => {
+                return (
+                    <Jar data={jar} key={jar.key} remove={this.removeJar} jarIndex={jar.key}/>
+                )
+              })}        
+          </div>
         </div>
       </div>
     )

@@ -2,9 +2,9 @@
 @import "components/base";
 @import "components/typography";
 
-// * {
-//     outline: 1px solid red;
-// }
+* {
+    outline: 1px solid red;
+}
 
 img {
     width: 100%;
@@ -13,7 +13,7 @@ img {
 .application {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    // height: 100vh;
     width: 100%;
 }
 
@@ -22,7 +22,7 @@ img {
     color: $color4;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    // height: 100vh;
     padding: 1%;
     width: 15%
 }
@@ -46,7 +46,7 @@ form {
 .sidebar__actions {
     display: flex;
     flex-direction: column;
-    height: 60%;
+    // height: 50%;
 }
 
 input, button {
@@ -78,16 +78,96 @@ footer {
 }
 
 .mainpage {
+    background-color: $color4;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    // height: 100vh;
     width: 85%;
 }
 
+.mainpage__titlediv {
+    text-align: center;
+}
+
+.mainpage__jarsdiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mainpage__jardiv {
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    padding: 20px;
+    position: relative;
+    width: 20%;
+}
+
+.mainpage__jardiv__deleteimgdiv {
+    height: 20px;
+    width: 20px;
+}
+
+.mainpage__jardiv__deleteimgdiv img {
+    width: 100%;
+}
+
+.mainpage__jardiv button {
+    background-color: unset;
+    border-radius: unset;
+    height: 20px;
+    margin: 0px 0px;
+    padding: 0px 0px;
+    width: 20px;
+}
+
 .mainpage__jardiv__imgdiv {
-    width: 300px;
+    width: 100%;
+}
+
+.mainpage__jardiv__imgdiv img {
+    width: 100%;
+}
+
+.mainpage__jardiv__jarcat,
+.mainpage__jardiv__jaramount {
+    // position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+// .mainpage__jardiv__jarcat {
+//     top: 150px;
+//     left: 103px;
+// }
+
+// .mainpage__jardiv__jaramount {
+// 	top: 200px;
+// 	left: 103px;
+// }
+
+.mainpage__jardiv h4 {
+    margin-top: 20px;
 }
 
 .mainpage input {
-    width: 180px;
+    border: 1px solid $color3;
+    width: 100%;
+}
+
+ul {
+    font-size: 14px;
+    list-style: none;
+    padding-left: 0;
+    text-transform: uppercase;
+}
+
+.mainpage__jardiv__deletepurdiv {
+    height: 15px;
+    width: 15px;
 }
