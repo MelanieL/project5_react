@@ -5,6 +5,7 @@ import Jar from './jar';
 import Purchase from './purchase';
 
 // Initialize Firebase
+// Comment
   var config = {
     apiKey: "AIzaSyCjYetNgrYSjfnwt8_BwbTXNymm8YK8QIA",
     authDomain: "project-5-jars.firebaseapp.com",
