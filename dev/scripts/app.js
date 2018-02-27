@@ -76,7 +76,7 @@ class App extends React.Component {
         <div className="sidebar">
           <div className="sidebar__titlebox">
             <div className="sidebar__titlebox__logodiv">
-              <img src="./dev/images/logo_white.png" alt="" />              
+              <img src="./public/images/logo_white.png" alt="" />              
             </div>
             <h1>Jars</h1>
           </div>

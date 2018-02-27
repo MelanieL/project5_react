@@ -81,7 +81,7 @@ class Jar extends React.Component {
     render() {
         return (
             <div className="mainpage__jardiv">
-                <button onClick={() => this.props.remove(this.props.jarIndex)}><div className="mainpage__jardiv__deleteimgdiv"><img src="dev/images/icon_delete.png" alt="" srcset="" /></div></button>
+                <button onClick={() => this.props.remove(this.props.jarIndex)}><div className="mainpage__jardiv__deleteimgdiv"><img src="./public/images/icon_delete.png" alt="" srcset="" /></div></button>
                 {/* Delete by Michiel Willemsen from the Noun Project */}
                 <div className="mainpage__jardiv__imgdiv">
                     <Logo />
