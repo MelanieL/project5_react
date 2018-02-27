@@ -8,4 +8,5 @@ class Logo extends React.Component {
     }
 }
 
+{/* Logo Credit: Jar by Deemak Daksina S from the Noun Project */ }
 export default Logo;

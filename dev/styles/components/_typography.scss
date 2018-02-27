@@ -1,0 +1,22 @@
+$title-font: 'Indie Flower', cursive;;
+$body-font: 'Open Sans', sans-serif;
+
+body {
+    font-family: $body-font;
+}
+
+h1  {
+    color: white;
+    font-family: $title-font;
+    font-size: 3rem;
+}
+
+h2  {
+    color: white;
+    text-align: center;
+    font-weight: 400;
+}
+
+h4  {
+    margin-top: 60px;
+}

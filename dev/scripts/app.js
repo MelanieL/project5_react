@@ -76,30 +76,32 @@ class App extends React.Component {
         <div className="sidebar">
           <div className="sidebar__titlebox">
             <div className="sidebar__titlebox__logodiv">
-              {/* Logo Credit: Jar by Deemak Daksina S from the Noun Project */}
-              <Logo />
+              <img src="./dev/images/logo_white.png" alt="" />              
             </div>
             <h1>Jars</h1>
           </div>
+          {/* This is where we will point the user name so it's customized */}
+          <h2>Jane User</h2>
           <div className="sidebar__actions">
-            <h4>Add a jar:</h4>
+            <h4>New Jar</h4>
             <form onSubmit={this.addJar}>
 
-              <label htmlFor="jarcat">Category name:</label>
+              <label htmlFor="jarcat">Category Name</label>
               <input type="text" id="jarcat" value={this.state.jarcat} onChange={this.handleChange} />
 
-              <label htmlFor="jaramount">Category total:</label>
+              <label htmlFor="jaramount">Category Total</label>
               <input type="text" id="jaramount" value={this.state.jaramount} onChange={this.handleChange}/>
 
               <input className="button add_jar_button" type="submit" value="Add Jar" />
             </form>
-
-            <button name="button">Logout</button>
-
           </div>
+
+          <button className="button">Logout</button>
+          
           <footer>
             &copy; 2018 - Melanie Phillips
-            </footer>
+          </footer>
+
         </div>
 
         <div className="mainpage">
