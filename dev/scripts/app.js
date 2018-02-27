@@ -67,7 +67,6 @@ class App extends React.Component {
   }
 
   removeJar(key) {
-    console.log(key);
     return firebase.database().ref('jars').child(key).remove();
   }
 

@@ -45,6 +45,7 @@ class Jar extends React.Component {
         
         dbrefjar.once('value', (snapshot) => {
             const data = snapshot.val();
+            console.log(data);
             const newJarTotal =  data - this.state.purchaseamount;
             // Set will reset a value in Firebase
             dbrefjar.set(newJarTotal);
@@ -63,17 +64,18 @@ class Jar extends React.Component {
     }
 
     removePurchase(key) {
-        
+        // e.preventDefault();
         const dbrefjar = firebase.database().ref(`jars/${this.props.jarIndex}/name`);
-        
+        const amountToAdd = this.state.purchases.find(el => el.key).name;
         dbrefjar.once('value', (snapshot) => {
             const data = snapshot.val();
-            const newJarTotal = data - this.state.purchaseamount;
+            console.log(data);
+            const newJarTotal = data + Number(amountToAdd);
             // Set will reset a value in Firebase
             dbrefjar.set(newJarTotal);
+            firebase.database().ref(`jars/${this.props.jarIndex}/purchases`).child(key).remove();
         });
         
-        firebase.database().ref(`jars/${this.props.jarIndex}/purchases`).child(key).remove();
     }
 
     render() {
@@ -101,7 +103,7 @@ class Jar extends React.Component {
 
             {this.state.purchases.map((purchase) => {
                 return (
-                    <Purchase data={purchase} key={purchase.key} remove={this.removePurchase} purchaseIndex={purchase.key} />
+                    <Purchase data={purchase} key={purchase.key} remove={() => this.removePurchase(purchase.key)} purchaseIndex={purchase.key} />
                 )
             })}
             </ul>
